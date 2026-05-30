@@ -29,7 +29,7 @@ function App() {
               ✓
             </span>
             <span className="text-lg font-semibold" style={{ color: '#1B2D5B' }}>
-              Hello, deployment chain working ✓
+              Deployment chain verified — ready for Phase 2 build ✓✓
             </span>
           </div>
           <p className="text-sm" style={{ color: '#94a3b8' }}>
