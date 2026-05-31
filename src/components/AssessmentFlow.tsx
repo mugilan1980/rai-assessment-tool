@@ -6,6 +6,7 @@ import {
   getOverallScore,
   getAdoptionProfile,
   getMaturityLevel,
+  getWorkforceMaturityBand,
 } from '../lib/scoring'
 import { supabase } from '../lib/supabase'
 import Header from './Header'
@@ -94,14 +95,13 @@ export default function AssessmentFlow({ orgProfile, onComplete, onBack }: Asses
           org_name: orgProfile.orgName,
           industry: orgProfile.industry,
           company_size: orgProfile.companySize,
-          respondent_name: orgProfile.respondentName,
-          respondent_role: orgProfile.respondentRole,
           governance_score: governanceScore,
           workforce_score: workforceScore,
           overall_score: overallScore,
           adoption_profile: adoptionProfile,
           maturity_level: maturity.level,
           maturity_label: maturity.label,
+          workforce_maturity_band: getWorkforceMaturityBand(workforceScore),
         })
         .select()
         .single()
