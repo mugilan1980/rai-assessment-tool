@@ -1,3 +1,5 @@
+import { SECTIONS } from './data/assessment'
+
 function App() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12" style={{ backgroundColor: '#F0F4F8' }}>
@@ -22,19 +24,36 @@ function App() {
           </p>
         </div>
 
-        {/* Status Card */}
-        <div className="bg-white rounded-2xl shadow-sm border p-8 text-center" style={{ borderColor: '#e2e8f0' }}>
-          <div className="flex items-center justify-center gap-3 mb-4">
+        {/* Data Foundation Card */}
+        <div className="bg-white rounded-2xl shadow-sm border p-8" style={{ borderColor: '#e2e8f0' }}>
+          <div className="flex items-center gap-3 mb-4">
             <span className="inline-flex items-center justify-center w-8 h-8 rounded-full text-white text-sm font-bold" style={{ backgroundColor: '#00A79D' }}>
               ✓
             </span>
             <span className="text-lg font-semibold" style={{ color: '#1B2D5B' }}>
-              Deployment chain verified — ready for Phase 2 build ✓✓
+              Data Foundation Loaded
             </span>
           </div>
-          <p className="text-sm" style={{ color: '#94a3b8' }}>
-            Scaffold deployed — Phase 2 build ready
+
+          <p className="text-sm mb-6" style={{ color: '#64748b' }}>
+            7 sections, 49 questions, ready for assessment flow
           </p>
+
+          <ol className="space-y-2">
+            {SECTIONS.map((section, i) => (
+              <li key={section.id} className="flex items-start gap-3">
+                <span
+                  className="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold shrink-0 mt-0.5"
+                  style={{ backgroundColor: '#1B2D5B', color: '#fff' }}
+                >
+                  {i + 1}
+                </span>
+                <span className="text-sm" style={{ color: '#334155' }}>
+                  {section.title}
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
 
         {/* Footer */}
