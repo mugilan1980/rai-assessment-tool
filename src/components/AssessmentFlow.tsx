@@ -16,7 +16,7 @@ import ValidationWarning from './ValidationWarning'
 
 interface AssessmentFlowProps {
   orgProfile: OrgProfile
-  onComplete: (assessmentId: string) => void
+  onComplete: (data: { assessmentId: string; responses: Record<string, number>; notes: Record<string, string> }) => void
   onBack: () => void
 }
 
@@ -132,7 +132,7 @@ export default function AssessmentFlow({ orgProfile, onComplete, onBack }: Asses
         }
       }
 
-      onComplete(assessment.id as string)
+      onComplete({ assessmentId: assessment.id as string, responses, notes })
     } catch (err) {
       console.error('Save failed:', err)
       setSaveError('Failed to save assessment. Please try again.')
