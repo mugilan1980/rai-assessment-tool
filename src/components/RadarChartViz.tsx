@@ -17,22 +17,22 @@ interface RadarChartVizProps {
   data: RadarDataPoint[]
 }
 
+// Keys must exactly match section titles from assessment.ts
 const SHORT_LABELS: Record<string, string> = {
   'Governance Structures & Accountability': 'Governance',
   'Human Oversight & Control': 'Oversight',
   'Data Governance & Privacy': 'Data Privacy',
-  'Transparency & Explainability': 'Transparency',
-  'Fairness & Non-Discrimination': 'Fairness',
-  'Accountability & Redress': 'Accountability',
-  'Workforce Transformation & Worker Outcomes': 'Workforce',
+  'Algorithmic Fairness & Transparency': 'Fairness',
+  'AI Ethics & Responsible Use': 'Ethics',
+  'Agentic AI Readiness': 'Agentic AI',
+  'Workforce-Centred AI Adoption': 'Workforce',
+}
+
+function formatLabel(value: string): string {
+  return SHORT_LABELS[value] ?? value
 }
 
 export default function RadarChartViz({ data }: RadarChartVizProps) {
-  const chartData = data.map((d) => ({
-    ...d,
-    section: SHORT_LABELS[d.section] ?? d.section,
-  }))
-
   return (
     <div className="bg-white rounded-2xl shadow-sm p-6">
       <h3 className="text-base font-semibold mb-4" style={{ color: '#1B2D5B' }}>
@@ -40,16 +40,18 @@ export default function RadarChartViz({ data }: RadarChartVizProps) {
       </h3>
       <div style={{ minHeight: 400, width: '100%' }}>
         <ResponsiveContainer width="100%" height={400}>
-          <RadarChart data={chartData} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
+          <RadarChart data={data} margin={{ top: 20, right: 40, bottom: 20, left: 40 }}>
             <PolarGrid stroke="#E5E7EB" />
             <PolarAngleAxis
               dataKey="section"
+              tickFormatter={formatLabel}
               tick={{ fill: '#374151', fontSize: 12 }}
             />
             <PolarRadiusAxis
               domain={[0, 4]}
               tickCount={5}
               tick={{ fill: '#9CA3AF', fontSize: 10 }}
+              allowDataOverflow
             />
             <Radar
               dataKey="score"
@@ -57,6 +59,7 @@ export default function RadarChartViz({ data }: RadarChartVizProps) {
               fillOpacity={0.3}
               stroke="#1B2D5B"
               strokeWidth={2}
+              isAnimationActive={false}
             />
           </RadarChart>
         </ResponsiveContainer>
