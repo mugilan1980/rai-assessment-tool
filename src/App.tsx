@@ -3,6 +3,7 @@ import { type OrgProfile } from './data/assessment'
 import WelcomeScreen from './components/WelcomeScreen'
 import AssessmentFlow from './components/AssessmentFlow'
 import ResultsDashboard from './components/ResultsDashboard'
+import ActionPlanScreen from './components/ActionPlanScreen'
 
 type Screen = 'welcome' | 'assessment' | 'results' | 'actionPlan'
 
@@ -68,25 +69,15 @@ function App() {
         />
       )}
 
-      {currentScreen === 'actionPlan' && (
-        <div className="flex flex-col items-center justify-start py-16 px-4">
-          <div className="bg-white rounded-2xl shadow-sm p-10 max-w-lg w-full text-center">
-            <h2 className="text-xl font-bold mb-3" style={{ color: '#1B2D5B' }}>
-              Action Plan Generation
-            </h2>
-            <p className="text-sm text-gray-500 mb-6">
-              Personalised 90-day Responsible AI Adoption plan coming in Block 5.
-            </p>
-            <button
-              type="button"
-              onClick={handleBackToWelcome}
-              className="text-sm font-medium transition-colors"
-              style={{ color: '#1B2D5B' }}
-            >
-              ← Start New Assessment
-            </button>
-          </div>
-        </div>
+      {currentScreen === 'actionPlan' && orgProfile && assessmentId && responses && notes && (
+        <ActionPlanScreen
+          orgProfile={orgProfile}
+          responses={responses}
+          notes={notes}
+          assessmentId={assessmentId}
+          onBackToResults={() => setCurrentScreen('results')}
+          onStartNew={handleBackToWelcome}
+        />
       )}
     </div>
   )
