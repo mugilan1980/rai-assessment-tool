@@ -1,0 +1,8 @@
+# Supabase project configuration
+# Docs: https://supabase.com/docs/guides/cli/config
+project_id = "lzoahhemaaxeaesshbzg"
+
+[functions.generate-action-plan]
+# This function is invoked from the browser before the user is authenticated,
+# so JWT verification is disabled. Deployed with --no-verify-jwt as well.
+verify_jwt = false
